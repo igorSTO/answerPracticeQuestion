@@ -1,0 +1,7 @@
+{
+    "baseUrl": "https://learn.acrobatiq.com/courses",
+    "ignoreTestFiles": "**/examples/*",
+    "viewportHeight": 1080,
+    "viewportWidth": 1920,
+    "video": false
+}

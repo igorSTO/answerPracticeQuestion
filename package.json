@@ -1,0 +1,16 @@
+{
+  "name": "vitalsource",
+  "version": "1.0.0",
+  "description": "cypress-project",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "^6.5.0"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/cypress run",
+    "headed": "npm run test -- --headed"
+  },
+  "author": "IgorS",
+  "license": "ISC"
+}
