@@ -20,6 +20,10 @@ const imageUrl = 'url("https://s3.amazonaws.com/prod-app-webcontent/courses_acro
 const backgroundColor = {
     red: 'rgb(250, 234, 230)',
     green: 'rgb(235, 252, 238)'
+};
+const messages = {
+    incorrectAnswerMessage: "Incorrect. Self-concept is based on relatively enduring and personal perceptions.",
+    correctAnswerMessage: "Correct. Self-concept is based on relatively enduring and personal perceptions.",
 }
 
 describe('Login to exist user', () => {
@@ -45,81 +49,31 @@ describe('Login to exist user', () => {
         cy.url().should('contain', '/courses/OUP_EC2_2020/page/wbp_the_self-concept_defined');
         cy.get(base.titleSection).eq(1).should('have.text', 'The Self-Concept Defined')
 
+        base.iframeSection(1)
+        base.chooseFirstQuestionMark()
+        base.clickDismissHint()
 
-        cy.wait(5000)
-        cy.get(base.iframe).then($element => {
+        base.chooseAnswer({
 
-            const $body = $element.contents().find('body')
-            let form = cy.wrap($body)
+            options: selfStudytOptions.preconceptions,
+            color: backgroundColor.red,
+            url: imageUrl,
+            coordinate: coordinates.red,
+            message: messages.incorrectAnswerMessage,
+            el: base.incorrectAnswerMessage
 
-            cy.log('expect Self-Study section')
-            form = cy.wrap($body)
-            form.find(base.section).eq(1).as('caption')
-            cy.get('@caption').should(($expectedText) => {
-                expect($expectedText.text()).to.include('Self-Study');
-            })
+        });
 
-            cy.log('choose first question mark')
-            form = cy.wrap($body)
-            form.find(base.questionMark).eq(0).click({ force: true })
-            form = cy.wrap($body)
-            form.find(base.hint).eq(0).as('hint')
-            cy.fixture("messages.json").then((message) => {
-                cy.get('@hint').should(($expectedText) => {
-                    expect($expectedText.text()).to.include(message.hint);
-                })
-            });
+        base.chooseAnswer({
 
+            options: selfStudytOptions.perceptions,
+            color: backgroundColor.green,
+            url: imageUrl,
+            coordinate: coordinates.green,
+            message: messages.correctAnswerMessage,
+            el: base.correctAnswerMessage
 
-            cy.log('click X to dismiss the hint box for first question mark')
-            form = cy.wrap($body)
-            form.find(base.closeHint).eq(0).click({ force: true })
-            form = cy.wrap($body)
-            form.find(base.alert).eq(0).as('hint')
-            cy.get('@hint').should('not.have.attr', 'hint')
+        });
 
-            // #1 incorrect Answer
-            cy.log('select first questions marks with incorrect Answer')
-            form = cy.wrap($body)
-            form.find(base.firstSelfStudyDropdown).eq(0).click({ force: true })
-            form = cy.wrap($body)
-            form.find(base.firstSelfStudyDropdownOptions).contains(selfStudytOptions.preconceptions).click({ force: true })
-
-            cy.log('expect incorrect answer')
-            cy.fixture("messages.json").then((message) => {
-                form = cy.wrap($body)
-                form.find(base.incorrectAnswerMessage).eq(0).should('contain', message.incorrectAnswerMessage)
-                    .and('have.css', 'background-color', backgroundColor.red)
-            });
-
-            cy.log('expect red X icon image')
-            form = cy.wrap($body)
-            form.find(base.incorrectAnswerMessage).eq(0).as('before')
-            cy.get('@before')
-                .before('background')
-                .should('contain', `${imageUrl} repeat scroll ${coordinates.red}`);
-
-            // #2 correct Answer
-            cy.log('select first questions marks with correct Answer')
-            form = cy.wrap($body)
-            form.find(base.firstSelfStudyDropdown).eq(0).click({ force: true })
-            form = cy.wrap($body)
-            form.find(base.firstSelfStudyDropdownOptions).contains(selfStudytOptions.perceptions).click({ force: true })
-
-            cy.log('expect correct answer')
-            cy.fixture("messages.json").then((message) => {
-                form = cy.wrap($body)
-                form.find(base.correctAnswerMessage).eq(0).should('contain', message.correctAnswerMessage)
-                    .and('have.css', 'background-color', backgroundColor.green)
-            });
-
-            cy.log('expect green Check icon image')
-            form = cy.wrap($body)
-            form.find(base.correctAnswerMessage).eq(0).as('before')
-            cy.get('@before')
-                .before('background')
-                .should('contain', `${imageUrl} repeat scroll ${coordinates.green}`);
-
-        })
     });
 });
