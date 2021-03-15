@@ -6,8 +6,8 @@ export class Base {
         this.section = '.caption';
         this.questionMark = 'button [title="Hints"]';
         this.hint = '.hint-body';
-        this.closeHint = 'button .mi-close',
-            this.alert = '.alert';
+        this.closeHint = 'button .mi-close';
+        this.alert = '.alert';
         this.titleSection = '.breadcrumb-item';
         this.iframe = '#iFrameResizer0';
         this.firstSelfStudyDropdown = '.select2-selection';
@@ -89,7 +89,7 @@ export class Base {
             const $body = $element.contents().find('body')
             let form = cy.wrap($body)
 
-            cy.log('select first questions marks with Answer')
+            cy.log('select questions marks with Answer')
             form = cy.wrap($body)
             form.find(this.firstSelfStudyDropdown).eq(index).click({ force: true })
             form = cy.wrap($body)
@@ -100,7 +100,7 @@ export class Base {
             form.find(el).eq(index).should('contain', message)
                 .and('have.css', 'background-color', color)
 
-            cy.log('expect red icon image')
+            cy.log('expect icon image')
             form = cy.wrap($body)
             form.find(el).eq(index).as('before')
             cy.get('@before')
