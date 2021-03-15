@@ -50,20 +50,20 @@ describe('Login to exist user', () => {
         cy.get(base.iframe).then($element => {
 
             const $body = $element.contents().find('body')
-            let stripe = cy.wrap($body)
+            let form = cy.wrap($body)
 
             cy.log('expect Self-Study section')
-            stripe = cy.wrap($body)
-            stripe.find(base.section).eq(1).as('caption')
+            form = cy.wrap($body)
+            form.find(base.section).eq(1).as('caption')
             cy.get('@caption').should(($expectedText) => {
                 expect($expectedText.text()).to.include('Self-Study');
             })
 
             cy.log('choose first question mark')
-            stripe = cy.wrap($body)
-            stripe.find(base.questionMark).eq(0).click({ force: true })
-            stripe = cy.wrap($body)
-            stripe.find(base.hint).eq(0).as('hint')
+            form = cy.wrap($body)
+            form.find(base.questionMark).eq(0).click({ force: true })
+            form = cy.wrap($body)
+            form.find(base.hint).eq(0).as('hint')
             cy.fixture("messages.json").then((message) => {
                 cy.get('@hint').should(($expectedText) => {
                     expect($expectedText.text()).to.include(message.hint);
@@ -72,50 +72,50 @@ describe('Login to exist user', () => {
 
 
             cy.log('click X to dismiss the hint box for first question mark')
-            stripe = cy.wrap($body)
-            stripe.find(base.closeHint).eq(0).click({ force: true })
-            stripe = cy.wrap($body)
-            stripe.find(base.alert).eq(0).as('hint')
+            form = cy.wrap($body)
+            form.find(base.closeHint).eq(0).click({ force: true })
+            form = cy.wrap($body)
+            form.find(base.alert).eq(0).as('hint')
             cy.get('@hint').should('not.have.attr', 'hint')
 
             // #1 incorrect Answer
             cy.log('select first questions marks with incorrect Answer')
-            stripe = cy.wrap($body)
-            stripe.find(base.firstSelfStudyDropdown).eq(0).click({ force: true })
-            stripe = cy.wrap($body)
-            stripe.find(base.firstSelfStudyDropdownOptions).contains(selfStudytOptions.preconceptions).click({ force: true })
+            form = cy.wrap($body)
+            form.find(base.firstSelfStudyDropdown).eq(0).click({ force: true })
+            form = cy.wrap($body)
+            form.find(base.firstSelfStudyDropdownOptions).contains(selfStudytOptions.preconceptions).click({ force: true })
 
             cy.log('expect incorrect answer')
             cy.fixture("messages.json").then((message) => {
-                stripe = cy.wrap($body)
-                stripe.find(base.incorrectAnswerMessage).eq(0).should('contain', message.incorrectAnswerMessage)
+                form = cy.wrap($body)
+                form.find(base.incorrectAnswerMessage).eq(0).should('contain', message.incorrectAnswerMessage)
                     .and('have.css', 'background-color', backgroundColor.red)
             });
 
             cy.log('expect red X icon image')
-            stripe = cy.wrap($body)
-            stripe.find(base.incorrectAnswerMessage).eq(0).as('before')
+            form = cy.wrap($body)
+            form.find(base.incorrectAnswerMessage).eq(0).as('before')
             cy.get('@before')
                 .before('background')
                 .should('contain', `${imageUrl} repeat scroll ${coordinates.red}`);
 
             // #2 correct Answer
             cy.log('select first questions marks with correct Answer')
-            stripe = cy.wrap($body)
-            stripe.find(base.firstSelfStudyDropdown).eq(0).click({ force: true })
-            stripe = cy.wrap($body)
-            stripe.find(base.firstSelfStudyDropdownOptions).contains(selfStudytOptions.perceptions).click({ force: true })
+            form = cy.wrap($body)
+            form.find(base.firstSelfStudyDropdown).eq(0).click({ force: true })
+            form = cy.wrap($body)
+            form.find(base.firstSelfStudyDropdownOptions).contains(selfStudytOptions.perceptions).click({ force: true })
 
             cy.log('expect correct answer')
             cy.fixture("messages.json").then((message) => {
-                stripe = cy.wrap($body)
-                stripe.find(base.correctAnswerMessage).eq(0).should('contain', message.correctAnswerMessage)
+                form = cy.wrap($body)
+                form.find(base.correctAnswerMessage).eq(0).should('contain', message.correctAnswerMessage)
                     .and('have.css', 'background-color', backgroundColor.green)
             });
 
             cy.log('expect green Check icon image')
-            stripe = cy.wrap($body)
-            stripe.find(base.correctAnswerMessage).eq(0).as('before')
+            form = cy.wrap($body)
+            form.find(base.correctAnswerMessage).eq(0).as('before')
             cy.get('@before')
                 .before('background')
                 .should('contain', `${imageUrl} repeat scroll ${coordinates.green}`);
