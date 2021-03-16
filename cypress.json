@@ -2,5 +2,9 @@
     "baseUrl": "https://learn.acrobatiq.com/courses",
     "viewportHeight": 1080,
     "viewportWidth": 1920,
-    "video": false
+    "video": false,
+    "retries": {
+        "runMode": 1,
+        "openMode": 1
+      }
 }
