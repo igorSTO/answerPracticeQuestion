@@ -32,6 +32,7 @@ describe('Login to exist user', () => {
         cy.login()
         cy.url().should('contain', '/courses')
         cy.log('Successful login')
+        cy.log('yo')
     });
 
     it('Go to the "The Self-Concept Defined" section and select correct and incorrect practice question', () => {
