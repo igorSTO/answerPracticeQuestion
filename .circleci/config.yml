@@ -1,0 +1,18 @@
+version: 2.1
+orbs:
+  cypress: cypress-io/cypress@1
+workflows:
+  build:
+    jobs:
+      - cypress/install
+      - cypress/run:
+          name: Cypress:Ui
+          requires:
+            - cypress/install
+          record: true
+          store_artifacts: true
+          start: npm ci
+          group: Ui
+          spec: "cypress/integration"
+
+     
