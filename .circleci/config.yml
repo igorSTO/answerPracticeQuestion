@@ -13,6 +13,6 @@ workflows:
           store_artifacts: true
           start: npm ci
           group: Ui
-          spec: "cypress/integration"
+          spec: "cypress/integration/*"
 
      
