@@ -38,6 +38,7 @@ export class Base {
     iframeSection(index = 0) {
         cy.wait(5000)
         cy.get(this.iframe).then($element => {
+            console.log($element);
             const $body = $element.contents().find('body')
             let form = cy.wrap($body)
 
