@@ -6,19 +6,24 @@ workflows:
     jobs:
       - cypress/install
       - cypress/run:
-          name: 4 machines
+          name: Rest
           requires:
             - cypress/install
+          executor: cypress/browsers-chrome69
+          start: npm ci
           record: true
           store_artifacts: true
           parallel: true
           parallelism: 4
-          group: 4 machines
+          group: rest
+          browser: chrome
+          spec: cypress/integration/*
       - cypress/run:
           name: Chrome
           requires:
             - cypress/install
           executor: cypress/browsers-chrome69
+          start: npm ci
           record: true
           store_artifacts: true
           parallel: true
