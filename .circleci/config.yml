@@ -6,22 +6,17 @@ workflows:
     jobs:
       - cypress/install
       - cypress/run:
-          name: Cypress:Ui
+          name: 4 machines
           requires:
             - cypress/install
           record: true
-          store_artifacts: true
-          start: npm ci
-          group: Ui
-          spec: "cypress/integration/*"
+          group: 1 machine
       - cypress/run:
-          name: Cypress:UI2
+          name: Chrome
           requires:
             - cypress/install
           executor: cypress/browsers-chrome69
           record: true
-          store_artifacts: true
-          start: npm ci
-          group: UI2
+          group: 2 machine
           browser: chrome
-          spec: "cypress/integration/*"
+          spec: cypress/integration/*
