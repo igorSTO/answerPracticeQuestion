@@ -22,6 +22,7 @@ workflows:
           parallelism: 2
           group: integration
           spec: cypress/integration/*
+          
       - cypress/run:
           executor: chrome-ff
           browser: chrome
