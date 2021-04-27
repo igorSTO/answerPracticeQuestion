@@ -6,6 +6,7 @@ workflows:
     jobs:
       - cypress/install
       - cypress/run:
+          name: 2 machines
           start: npm ci
           requires:
             - cypress/install
@@ -14,3 +15,15 @@ workflows:
           parallel: true
           parallelism: 2
           group: 2 machines
+      - cypress/run:
+          name: Chrome
+          start: npm ci
+          requires:
+            - cypress/install
+          executor: cypress/browsers-chrome69
+          record: true
+          parallel: true
+          parallelism: 2
+          group: smoke tests
+          browser: chrome
+          spec: cypress/integration/smoke/*
