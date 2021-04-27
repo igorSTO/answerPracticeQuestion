@@ -10,7 +10,6 @@ workflows:
           requires:
             - cypress/install
           executor: cypress/browsers-chrome69
-          start: npm ci
           record: true
           store_artifacts: true
           parallel: true
@@ -23,7 +22,6 @@ workflows:
           requires:
             - cypress/install
           executor: cypress/browsers-chrome69
-          start: npm ci
           record: true
           store_artifacts: true
           parallel: true
