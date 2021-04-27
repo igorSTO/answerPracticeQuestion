@@ -14,7 +14,7 @@ workflows:
           start: npm ci
           group: Ui
           spec: "cypress/integration/*"
-        - cypress/run:
+      - cypress/run:
           name: Cypress:UI2
           requires:
             - cypress/install
