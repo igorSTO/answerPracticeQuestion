@@ -14,5 +14,16 @@ workflows:
           start: npm ci
           group: Ui
           spec: "cypress/integration/*"
+        - cypress/run:
+          name: Cypress:UI2
+          requires:
+            - cypress/install
+          executor: cypress/browsers-chrome69
+          record: true
+          store_artifacts: true
+          start: npm ci
+          group: UI2
+          browser: chrome
+          spec: "cypress/integration/*"
 
      
