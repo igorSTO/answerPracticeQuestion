@@ -10,6 +10,7 @@ workflows:
           requires:
             - cypress/install
           record: true
+          store_artifacts: true
           parallel: true
           parallelism: 4
           group: 4 machines
@@ -19,6 +20,7 @@ workflows:
             - cypress/install
           executor: cypress/browsers-chrome69
           record: true
+          store_artifacts: true
           parallel: true
           parallelism: 2
           group: smoke tests
