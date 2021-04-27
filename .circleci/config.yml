@@ -6,6 +6,8 @@ workflows:
     jobs:
       - cypress/install
       - cypress/run:
+          executor: cypress/browsers-chrome69
+          browser: chrome
           name: 2 machines
           start: npm ci
           requires:
@@ -16,6 +18,8 @@ workflows:
           parallelism: 2
           group: 2 machines
       - cypress/run:
+          executor: cypress/browsers-chrome69
+          browser: chrome
           name: Chrome
           requires:
             - cypress/install
