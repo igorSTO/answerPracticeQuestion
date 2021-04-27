@@ -6,26 +6,9 @@ workflows:
     jobs:
       - cypress/install
       - cypress/run:
-          name: Rest
           requires:
             - cypress/install
-          executor: cypress/browsers-chrome69
           record: true
-          store_artifacts: true
-          parallel: true
-          parallelism: 4
-          group: rest
-          browser: chrome
-          spec: cypress/integration/*
-      - cypress/run:
-          name: Chrome
-          requires:
-            - cypress/install
-          executor: cypress/browsers-chrome69
-          record: true
-          store_artifacts: true
           parallel: true
           parallelism: 2
-          group: smoke tests
-          browser: chrome
-          spec: cypress/integration/smoke/*
+          group: 2 machines
