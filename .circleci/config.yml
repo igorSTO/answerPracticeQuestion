@@ -30,6 +30,7 @@ workflows:
           requires:
             - cypress/install
           record: true
+          store_artifacts: true
           parallel: true
           parallelism: 2
           group: smoke tests
