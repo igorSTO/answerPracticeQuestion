@@ -25,5 +25,3 @@ workflows:
           group: UI2
           browser: chrome
           spec: "cypress/integration/*"
-
-     
