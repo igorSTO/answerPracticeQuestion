@@ -18,11 +18,9 @@ workflows:
             - cypress/install
           record: true
           store_artifacts: true
-          parallel: true
-          parallelism: 2
           group: integration
           spec: cypress/integration/*
-          
+
       - cypress/run:
           executor: chrome-ff
           browser: chrome
