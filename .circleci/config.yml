@@ -12,7 +12,7 @@ workflows:
       - cypress/run:
           executor: chrome-ff
           browser: chrome
-          name: 2 machines
+          name: cy:integration
           start: npm ci
           requires:
             - cypress/install
@@ -20,11 +20,13 @@ workflows:
           store_artifacts: true
           parallel: true
           parallelism: 2
-          group: 2 machines
+          group: integration
+          spec: cypress/integration/*
       - cypress/run:
           executor: chrome-ff
           browser: chrome
-          name: Chrome
+          name: cy:smoke
+          start: npm ci
           requires:
             - cypress/install
           record: true
