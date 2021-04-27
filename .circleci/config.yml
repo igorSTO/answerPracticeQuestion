@@ -1,12 +1,16 @@
 version: 2.1
 orbs:
   cypress: cypress-io/cypress@1
+executors:
+  chrome-ff:
+    docker:
+      - image: 'cypress/browsers:node12.14.1-chrome85-ff81'
 workflows:
   build:
     jobs:
       - cypress/install
       - cypress/run:
-          executor: cypress/browsers-chrome69
+          executor: chrome-ff
           browser: chrome
           name: 2 machines
           start: npm ci
@@ -18,7 +22,7 @@ workflows:
           parallelism: 2
           group: 2 machines
       - cypress/run:
-          executor: cypress/browsers-chrome69
+          executor: chrome-ff
           browser: chrome
           name: Chrome
           requires:
