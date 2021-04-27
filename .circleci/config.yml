@@ -15,3 +15,12 @@ workflows:
           parallel: true
           parallelism: 2
           group: 2 machines
+      - cypress/run:
+          name: Chrome
+          requires:
+            - cypress/install
+          record: true
+          parallel: true
+          parallelism: 2
+          group: smoke tests
+          spec: cypress/integration/smoke/*
